@@ -13,9 +13,9 @@ node {
     env.BUILDIMG=imageName
     env.BUILD_TAG=tag
 
-    stage 'Clone'
+    stage "Install"
 
-        git 'https://github.com/SimonHirner/kubernetes-jenkins-simplist.git'
+        sh "mvn -f simplist/backend/pom.xml install"
 
 
     stage "Test"
