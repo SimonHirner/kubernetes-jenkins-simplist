@@ -1,6 +1,6 @@
 node {
 
-    withEnv(['MONGO_URL=mongodb://192.168.49.2:3006/simplist']) {
+    withEnv(['MONGO_URL=mongodb://192.168.49.2:30006/simplist']) {
 
         checkout scm
 
