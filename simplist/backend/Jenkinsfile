@@ -13,6 +13,10 @@ node {
     env.BUILDIMG=imageName
     env.BUILD_TAG=tag
 
+    stage "Install"
+
+        sh "mvn install"
+
     stage "Build"
 
         sh "docker build -t ${imageName} simplist/backend"
