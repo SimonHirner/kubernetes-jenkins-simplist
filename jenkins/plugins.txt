@@ -72,3 +72,4 @@ ldap:latest
 email-ext:latest
 kubernetes-cd:1.0.0
 azure-commons:latest
+maven-plugin:latest
