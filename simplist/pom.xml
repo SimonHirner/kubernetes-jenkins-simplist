@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>edu.hm</groupId>
 	<artifactId>simplist</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>Simplist</name>
 	<description>Demo project for a to-do list using Spring Boot and Vue.js</description>
     <packaging>pom</packaging>

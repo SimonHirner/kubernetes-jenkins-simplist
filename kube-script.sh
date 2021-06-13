@@ -17,6 +17,10 @@ kubectl rollout status deployments/registry;
 docker build -t 192.168.49.2:30400/jenkins:latest -f ./jenkins/Dockerfile ./jenkins;
 docker push 192.168.49.2:30400/jenkins:latest;
 
+# Deploy MongoDB
+kubectl apply -f ./kubernetes/simplist-mongo.yaml;
+kubectl rollout status deployment/mongo;
+
 # Deploy Jenkins
 kubectl apply -f ./kubernetes/jenkins.yaml;
 kubectl rollout status deployment/jenkins;
