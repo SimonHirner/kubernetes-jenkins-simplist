@@ -18,14 +18,6 @@ node {
         git 'https://github.com/SimonHirner/kubernetes-jenkins-simplist.git'
 
 
-
-
-    stage "Install"
-
-        dir('kubernetes-jenkins-simplist/simplist/backend') {
-            sh "mvn clean install"
-        }
-
     stage "Test"
 
         sh "mvn -f simplist/backend/pom.xml test"
