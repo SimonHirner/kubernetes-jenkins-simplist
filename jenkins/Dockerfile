@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:latest
+FROM jenkins/jenkins:jdk11
 USER root
 
 # Pre-Install Jenkins Plugins
@@ -19,9 +19,6 @@ apt-get update && apt-get install -y kubectl
 
 # Installing Maven
 RUN apt-get update && apt-get install -y maven
-
-# Installing
-RUN apt-get update && apt-get install -y openjdk-11-jdk
 
 # Grant jenkins user group access to /var/run/docker.sock
 RUN addgroup --gid 1001 dsock
