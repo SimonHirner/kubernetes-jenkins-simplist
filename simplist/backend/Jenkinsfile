@@ -15,11 +15,11 @@ node {
 
     stage "Install"
 
-        sh "mvn -f backend/pom.xml install"
+        sh "mvn -f ./backend/pom.xml install"
 
     stage "Test"
 
-        sh "mvn -f backend/pom.xml test"
+        sh "mvn -f ./backend/pom.xml test"
 
     stage "Build"
 
