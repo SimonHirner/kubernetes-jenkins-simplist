@@ -31,11 +31,10 @@ metadata:
   labels:
     app: simplist-backend
 spec:
+  selector:
+    app: simplist-backend
   ports:
     - port: 8081
       targetPort: 8081
-      nodePort: 30003
-  selector:
-    app: simplist-backend
-    tier: simplist-backend
+      nodePort: 30010
   type: NodePort

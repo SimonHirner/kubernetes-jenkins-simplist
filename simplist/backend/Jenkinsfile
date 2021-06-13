@@ -15,15 +15,10 @@ node {
         env.BUILDIMG=imageName
         env.BUILD_TAG=tag
 
-        stage "Install"
-
-            sh "mvn -f simplist/backend/pom.xml install"
-
-
-        stage "Test"
+        stage "Install and Test"
 
             try {
-                sh "mvn -f simplist/backend/pom.xml test"
+                sh "mvn -f simplist/backend/pom.xml install"
             } finally {
                 junit 'simplist/backend/target/surefire-reports/TEST-edu.hm.simplist.SimplistApplicationTests.xml'
                 junit 'simplist/backend/target/surefire-reports/TEST-edu.hm.simplist.TaskControllerMockTest.xml'
