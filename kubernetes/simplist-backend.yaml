@@ -1,35 +1,27 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: simplist-backend
-  labels:
-    app: simplist-backend
 spec:
   selector:
     matchLabels:
       app: simplist-backend
-  strategy:
-    type: Recreate
+  replicas: 1
   template:
     metadata:
       labels:
         app: simplist-backend
-        tier: simplist-backend
     spec:
       containers:
-        - image: 192.168.49.2:30400/simplist-backend:$BUILD_TAG
-          name: simplist-backend
+        - name: simplist-backend
+          image: 192.168.49.2:30400/simplist-backend:$BUILD_TAG
           imagePullPolicy: Always
-          lifecycle:
-            postStart:
-              exec:
-                command: ["/up.sh"]
-            preStop:
-              exec:
-                command: ["/down.sh"]
           ports:
-            - containerPort: 3000
-              name: simplist-backend
+            - containerPort: 8081
+          env:
+            - name: MONGO_URL
+              value: mongodb://mongo:27017/dev
 
 ---
 apiVersion: v1
@@ -40,67 +32,10 @@ metadata:
     app: simplist-backend
 spec:
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 8081
+      targetPort: 8081
+      nodePort: 30003
   selector:
     app: simplist-backend
     tier: simplist-backend
   type: NodePort
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mongo
-  labels:
-    app: mongo
-spec:
-  selector:
-    matchLabels:
-      app: mongo
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: mongo
-        tier: mongo
-    spec:
-      containers:
-        - image: mongo:latest
-          name: mongo
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 27017
-              name: mongo
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo
-  labels:
-    app: mongo
-spec:
-  ports:
-    - port: 27017
-      targetPort: 27017
-  selector:
-    app: mongo
-    tier: mongo
-  type: NodePort
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: puzzle
-spec:
-  rules:
-    - host: puzzle.192.168.49.2.xip.io
-      http:
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: puzzle
-                port:
-                  number: 3000
