@@ -13,13 +13,22 @@ node {
     env.BUILDIMG=imageName
     env.BUILD_TAG=tag
 
+    stage 'Clone'
+
+        git 'https://github.com/SimonHirner/kubernetes-jenkins-simplist.git'
+
+
+
+
     stage "Install"
 
-        sh "mvn -f ./backend/pom.xml install"
+        dir('kubernetes-jenkins-simplist/simplist/backend') {
+            sh "mvn clean install"
+        }
 
     stage "Test"
 
-        sh "mvn -f ./backend/pom.xml test"
+        sh "mvn -f simplist/backend/pom.xml test"
 
     stage "Build"
 
