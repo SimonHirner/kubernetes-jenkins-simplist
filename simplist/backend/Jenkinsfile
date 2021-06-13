@@ -25,7 +25,7 @@ node {
             try {
                 sh "mvn -f simplist/backend/pom.xml test"
             } finally {
-                junit 'target/surefire-reports/*.xml'
+                junit 'simplist/backend/target/surefire-reports/*.xml'
             }
 
         stage "Build"
