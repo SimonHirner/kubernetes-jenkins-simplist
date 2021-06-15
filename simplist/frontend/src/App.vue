@@ -34,7 +34,7 @@
 import Tasks from "@/components/Tasks";
 import AddTask from "@/components/AddTask";
 
-const URL = "http://127.0.0.1:8080";
+const URL = "http://192.168.49.2:30010";
 
 export default {
   name: "App",
